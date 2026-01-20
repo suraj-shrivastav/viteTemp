@@ -40,7 +40,11 @@ jobs:
           context: .
           file: Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/vite-app:${{ github.sha }}
+          tags: |
+            ${{ secrets.DOCKER_USERNAME }}/vite-app:${{ github.sha }}
+            ${{ secrets.DOCKER_USERNAME }}/vite-app:latest
+          cache-from: type=registry,ref=${{ secrets.DOCKER_USERNAME }}/vite-app:latest
+          cache-to: type=inline
       
 
 
